@@ -56,7 +56,7 @@ class SecurityHelper {
 
     public static function encode($data, $ciphering = 'aes-256-ctr', $passphrase = '', $options = 0, $iv = '')
     {
-        if (!$data) {
+        if ($data == '' || $data == null) {
             throw new \Exception('You must give a data to encode!');
         }
 
@@ -76,8 +76,8 @@ class SecurityHelper {
 
     public static function decode($encoded, $ciphering = 'aes-256-ctr', $passphrase = '', $options = 0, $iv = '')
     {
-        if (!$encoded) {
-            throw new \Exception('You must give a data to decode!');
+        if ($encoded == '' || $encoded == null) {
+            return '';
         }
 
         self::checkCiphering($ciphering);

@@ -25,6 +25,7 @@ class SecurityHelper {
         // More security for passphrase
         $passphrase = base64_encode($passphrase);
         $passphrase = hash('sha256', $passphrase, true);
+        return $passphrase;
     }
 
     private static function makeIv($ciphering)

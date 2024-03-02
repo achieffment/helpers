@@ -50,6 +50,9 @@ class Helper {
         )
             $phone = '7' . substr($phone, 1);
 
+        if (mb_strlen($phone) == 10)
+            $phone = '7' . substr($phone, 1);
+
         return ($tel ? 'tel:' : '') . '+' . $phone;
     }
 

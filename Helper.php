@@ -82,4 +82,55 @@ class Helper {
             file_put_contents($path, $info);
     }
 
+    /**
+     * @param string $secret
+     * @param string $token
+     * @param string $remoteip
+     * @return false|mixed
+     */
+    public function reCAPTCHAV3(string $secret, string $token, string $remoteip = '') {
+        if (!$secret || !$token)
+            return false;
+
+        $url = 'https://www.google.com/recaptcha/api/siteverify';
+        $params = [
+            'secret'   => $secret,
+            'response' => $token,
+            'remoteip' => $remoteip ? $remoteip : $_SERVER['REMOTE_ADDR'],
+        ];
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($ch, CURLOPT_HEADER, false);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $response = curl_exec($ch);
+        return json_decode($response, true);
+    }
+
+    /**
+     * @param string $value
+     * @param string $secret
+     * @param string $token
+     * @param string $remoteip
+     * @return bool
+     */
+    public function reCAPTCHAV3Validate(string $value, string $secret, string $token, string $remoteip = '')
+    {
+        if (!$value)
+            return false;
+
+        $response = $this->reCAPTCHAV3($value, $secret, $token, $remoteip);
+
+        if (
+            !$response ||
+            !is_array($response) ||
+            !isset($response['success']) ||
+            !$response["success"]
+        )
+            return false;
+
+        return true;
+    }
+
 }

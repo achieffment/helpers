@@ -1,3 +1,9 @@
+## Installation
+
+```
+composer require chieff/helpers
+```
+
 ## Helpers
 
 ```php

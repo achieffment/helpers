@@ -51,7 +51,7 @@ class Helper {
             $phone = '7' . substr($phone, 1);
 
         if (mb_strlen($phone) == 10)
-            $phone = '7' . substr($phone, 1);
+            $phone = '7' . $phone;
 
         return ($tel ? 'tel:' : '') . '+' . $phone;
     }

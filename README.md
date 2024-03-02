@@ -15,6 +15,7 @@ Helper::var_dump($mixed); // '<pre>dumped data</pre>'
 echo Helper::makePhoneLink(''); // ''
 echo Helper::makePhoneLink('', false); // If empty return false
 echo Helper::makePhoneLink('7 (911) 911-91-91'); // +79119119191
+echo Helper::makePhoneLink('7 (911) 911-91-91', true, true); // tel:+79119119191
 
 Helper::sendFileLog('data'); // Save to $_SERVER['DOCUMENT_ROOT'] . '/log.log';
 Helper::sendFileLog('data', $_SERVER['DOCUMENT_ROOT'] . '/log.log'); // Save to $_SERVER['DOCUMENT_ROOT'] . '/log.log';

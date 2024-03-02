@@ -29,9 +29,10 @@ class Helper {
     /**
      * @param string $phone
      * @param bool $empty
+     * @param bool $tel
      * @return false|string
      */
-    public static function makePhoneLink(string $phone, bool $empty = true)
+    public static function makePhoneLink(string $phone, bool $empty = true, bool $tel = false)
     {
         if (!$phone)
             return $empty ? '' : false;
@@ -49,7 +50,7 @@ class Helper {
         )
             $phone = '7' . substr($phone, 1);
 
-        return '+' . $phone;
+        return ($tel ? 'tel:' : '') . '+' . $phone;
     }
 
     /**

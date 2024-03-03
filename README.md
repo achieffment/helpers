@@ -145,5 +145,18 @@ echo $cl->getCityByIp(false, true, 'предложный'); // will return city 
 For more information about cases https://github.com/wapmorgan/Morphos/tree/master.
 
 ```php
+use chieff\helpers\CityHelper;
+
 echo CityHelper::getCityMorph('Ухта', 'предложный'); // will return city in given case, for more information read code above
+```
+
+## Recaptcha
+
+```php
+use chieff\helpers\RecaptchaHelper;
+
+echo RecaptchaHelper::reCAPTCHAV3JS('public', 'rcv_token'); // makes js for rcv3 and updates field with name rcv_token
+RecaptchaHelper::reCAPTCHAV3Validate('secret', 'token', 'ip'); // sends request with secret and given token and returns true or false
+
+
 ```

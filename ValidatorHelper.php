@@ -93,7 +93,7 @@ class ValidatorHelper {
         if (!$matches || !isset($matches[0]) || !$matches[0])
             return false;
 
-        $phone = implode('', $matches);
+        $phone = implode('', $matches[0]);
 
         if (mb_strlen($phone) != $length)
             return false;

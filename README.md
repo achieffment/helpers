@@ -156,7 +156,6 @@ echo CityHelper::getCityMorph('Ухта', 'предложный'); // will retur
 use chieff\helpers\RecaptchaHelper;
 
 echo RecaptchaHelper::reCAPTCHAV3JS('public', 'rcv_token'); // makes js for rcv3 and updates field with name rcv_token
+
 RecaptchaHelper::reCAPTCHAV3Validate('secret', 'token', 'ip'); // sends request with secret and given token and returns true or false
-
-
 ```

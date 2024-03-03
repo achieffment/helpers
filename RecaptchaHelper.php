@@ -62,11 +62,11 @@ class RecaptchaHelper {
      */
     public static function reCAPTCHAV3JS(string $public, string $field = 'rcv_token')
     {
-        if (!$public)
+        if (!$public || !$field)
             return '';
 
-        return `
-        <script src="https://www.google.com/recaptcha/api.js?onload=ReCaptchaCallbackV3&render={$public}"></script>
+        return '
+        <script src="https://www.google.com/recaptcha/api.js?onload=ReCaptchaCallbackV3&render=' . $public .  '"></script>
         <script>
             var ReCaptchaCallbackV3 = function() {
             grecaptcha.ready(function() {
@@ -75,16 +75,17 @@ class RecaptchaHelper {
             });
         };
             function grecaptchaExecute() {
-                grecaptcha.execute({$public}, { action: 'submit' }).then(function(token) {
-                    var fieldsToken = document.getElementById({$field});
-                    if (fieldsToken !== undefined && fieldsToken !== 'undefined' && fieldsToken !== null)
+                grecaptcha.execute("' . $public . '", { action: "submit" }).then(function(token) {
+                    var fieldsToken = document.getElementById("' . $field . '");
+                    if (fieldsToken !== undefined && fieldsToken !== "undefined" && fieldsToken !== null)
                         fieldsToken.value = token;
                 });
             };
             setInterval(function() {
                 grecaptcha.reset();
             }, 60000);
-        </script>`;
+        </script>
+        ';
     }
 
 }

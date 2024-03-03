@@ -81,6 +81,7 @@ echo $decoded; // Simple string
 ```
 
 ### Image encoding:
+
 ```php
 use chieff\helpers\SecurityHelper;
 
@@ -114,4 +115,28 @@ $decoded_image = SecurityHelper::getImageElement(
 
 if ($decoded_image)
     echo $decoded_image; // <img src='...' title='title' alt='alt' loading='lazy'>
+```
+
+### Cities
+
+#### By ip
+
+Helper uses DaData service to locate city by ip, for more information on https://dadata.ru and https://github.com/hflabs/dadata-php), it works only for Russian Federation.
+
+```php
+use chieff\helpers\CityHelper;
+
+$cl = new CityHelper('Ухта', 'token', 'secret');
+
+echo $cl->getCityByIp(false); // will not check robots like Yandex, Googlebot and etc.
+echo $cl->getCityByIp(false, true); // will return city in morph case, for example: Ухте
+echo $cl->getCityByIp(false, true, 'предложный'); // will return city in given case, for more information read code above
+```
+
+#### Morph
+
+For more information about cases https://github.com/wapmorgan/Morphos/tree/master.
+
+```php
+echo CityHelper::getCityMorph('Ухта', 'предложный'); // will return city in given case, for more information read code above
 ```

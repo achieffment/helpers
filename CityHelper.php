@@ -27,7 +27,7 @@ class CityHelper {
     /**
      * @var string
      */
-    public string $city;
+    public string $cityDefault;
 
     /**
      * @param string $cityDefault
@@ -43,7 +43,7 @@ class CityHelper {
         if (!$token || !$secret)
             throw new \Exception('Token or secret are empty!');
 
-        $this->city = $cityDefault;
+        $this->cityDefault = $cityDefault;
 
         $this->dadata_token = $token;
         $this->dadata_secret = $secret;
@@ -56,8 +56,12 @@ class CityHelper {
      * @param bool $morphUse
      * @param string $morphCase
      * @return string
+     * @throws \Exception
      */
-    public function getCity(bool $robotCheck = true, bool $morphUse = true, string $morphCase = 'предложный') {
+    public function getCityByIp(bool $robotCheck = true, bool $morphUse = true, string $morphCase = 'предложный')
+    {
+        $city = $this->cityDefault;
+
         if (
             (
                 !$robotCheck ||
@@ -79,16 +83,30 @@ class CityHelper {
                     isset($result["data"]["city"]) &&
                     $result["data"]["city"]
                 )
-                    $this->city = $result["data"]["city"];
+                    $city = $result["data"]["city"];
             } catch (\Exception $e) {
 
             }
         }
 
         if ($morphUse)
-            $this->city = GeographicalNamesInflection::getCase($this->city, $morphCase);
+            $city = self::getCityMorph($city, $morphCase);
 
-        return $this->city;
+        return $city;
+    }
+
+    /**
+     * @param string $city
+     * @param string $morphCase
+     * @return string
+     * @throws \Exception
+     */
+    public static function getCityMorph(string $city, string $morphCase = 'предложный')
+    {
+        if (!$city)
+            return '';
+
+        return GeographicalNamesInflection::getCase($city, $morphCase);
     }
 
 }

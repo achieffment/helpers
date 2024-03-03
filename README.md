@@ -124,9 +124,9 @@ if ($decoded_image)
     echo $decoded_image; // <img src='...' title='title' alt='alt' loading='lazy'>
 ```
 
-### Cities
+## Cities
 
-#### By ip
+### By ip
 
 Helper uses DaData service to locate city by ip, for more information on https://dadata.ru and https://github.com/hflabs/dadata-php), it works only for Russian Federation.
 
@@ -140,7 +140,7 @@ echo $cl->getCityByIp(false, true); // will return city in morph case, for examp
 echo $cl->getCityByIp(false, true, 'предложный'); // will return city in given case, for more information read code above
 ```
 
-#### Morph
+### Morph
 
 For more information about cases https://github.com/wapmorgan/Morphos/tree/master.
 

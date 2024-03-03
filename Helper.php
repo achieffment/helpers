@@ -136,4 +136,38 @@ class Helper {
         return true;
     }
 
+    /**
+     * @return string
+     */
+    public static function getIp() {
+        $ip = '';
+        if (!empty($_SERVER['HTTP_CLIENT_IP']))
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        else
+            $ip = $_SERVER['REMOTE_ADDR'];
+        return $ip;
+    }
+
+    /**
+     * @return bool
+     */
+    public static function isRobot() {
+        if (
+            isset($_SERVER['HTTP_USER_AGENT']) &&
+            (
+                (substr($_SERVER['HTTP_USER_AGENT'],'Yandex') !== false) ||
+                (substr($_SERVER['HTTP_USER_AGENT'],'Googlebot') !== false) ||
+                (substr($_SERVER['HTTP_USER_AGENT'],'Googlebot-Mobile') !== false) ||
+                (substr($_SERVER['HTTP_USER_AGENT'],'Mail.Ru') !== false) ||
+                (substr($_SERVER['HTTP_USER_AGENT'],'yahoo') !== false) ||
+                (substr($_SERVER['HTTP_USER_AGENT'],'msnbot') !== false) ||
+                (substr($_SERVER['HTTP_USER_AGENT'],'StackRambler') !== false)
+            )
+        )
+            return true;
+        return false;
+    }
+
 }

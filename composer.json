@@ -7,6 +7,7 @@
         }
     },
     "require": {
-
+        "hflabs/dadata": "^22.3",
+        "wapmorgan/morphos": "^3.2"
     }
 }

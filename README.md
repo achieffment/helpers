@@ -63,6 +63,13 @@ echo $string; // ''
 $string = 'qwerty';
 $string = ValidatorHelper::validateEmpty($string, 0, true); // is number
 echo $string; // ''
+
+ValidatorHelper::validatePhone('+7 (111) 111-11-11', 11); // validates phone and check length
+
+ValidatorHelper::validateIp('255.255.255.255'); // (true) is ip
+ValidatorHelper::validateIp('255.255.255.255', false); // (true) is ip and can not be with port
+ValidatorHelper::validateIp('255.255.255.255:80', true, false); // (true) is ip and has port
+ValidatorHelper::validateIp('255.255.255.255', true, true); // (true) is ip and can be with port or not
 ```
 
 ## Encoding

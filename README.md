@@ -147,7 +147,7 @@ For more information about cases https://github.com/wapmorgan/Morphos/tree/maste
 ```php
 use chieff\helpers\CityHelper;
 
-echo CityHelper::getCityMorph('Ухта', 'предложный'); // will return city in given case, for more information read code above
+echo CityHelper::getCityMorph('Ухта', 'предложный'); // (Ухте) will return city in given case
 ```
 
 ## Recaptcha
@@ -158,4 +158,19 @@ use chieff\helpers\RecaptchaHelper;
 echo RecaptchaHelper::reCAPTCHAV3JS('public', 'rcv_token'); // makes js for rcv3 and updates field with name rcv_token
 
 RecaptchaHelper::reCAPTCHAV3Validate('secret', 'token', 'ip'); // sends request with secret and given token and returns true or false
+```
+
+## Morph
+
+For more information about cases https://github.com/wapmorgan/Morphos/tree/master.
+
+```php
+use chieff\helpers\MorphHelper;
+
+echo getName('Иванов Петр', 'родительный') // Иванова Петра
+echo getCity('Москва', 'родительный') // Москвы
+echo getPluralize(10, 'новый дом') // 10 новых домов
+echo getCardinalNumber(567, 'именительный') // пятьсот шестьдесят семь
+echo getOrdinalNumber(961, 'именительный') // девятьсот шестьдесят первый
+echo getTime(time() + 3600) // через 1 час
 ```

@@ -32,51 +32,64 @@ class MorphHelper {
     }
 
     /**
-     * @param int $count
+     * @param int|string $count
      * @param string $string
      * @return string
      */
-    public static function getPluralize(int $count, string $string)
+    public static function getPluralize(int|string $count, string $string)
     {
-        if (($count < 0) || !$string)
+        if (
+            !is_numeric($count) ||
+            ($count < 0) ||
+            !$string
+        )
             return '';
 
         return morphos\Russian\pluralize($count, $string);
     }
 
     /**
-     * @param int $number
+     * @param int|string $number
      * @param string $morphCase
      * @return string
      */
-    public static function getCardinalNumber(int $number, string $morphCase = 'именительный')
+    public static function getCardinalNumber(int|string $number, string $morphCase = 'именительный')
     {
-        if ($number < 0)
+        if (
+            !is_numeric($number) ||
+            $number < 0
+        )
             return '';
 
         return morphos\Russian\CardinalNumeralGenerator::getCase($number, $morphCase);
     }
 
     /**
-     * @param int $number
+     * @param int|string $number
      * @param string $morphCase
      * @return string
      */
-    public static function getOrdinalNumber(int $number, string $morphCase = 'именительный')
+    public static function getOrdinalNumber(int|string $number, string $morphCase = 'именительный')
     {
-        if ($number < 0)
+        if (
+            !is_numeric($number) ||
+            $number < 0
+        )
             return '';
 
         return morphos\Russian\OrdinalNumeralGenerator::getCase($number, $morphCase);
     }
 
     /**
-     * @param $time
+     * @param int|string $time
      * @return string
      */
-    public static function getTime($time)
+    public static function getTime(int|string $time)
     {
-        if (!$time)
+        if (
+            !$time ||
+            !is_numeric($time)
+        )
             return '';
 
         return morphos\Russian\TimeSpeller::spellDifference($time, morphos\TimeSpeller::DIRECTION);

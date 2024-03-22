@@ -33,19 +33,19 @@ class MorphHelper {
 
     /**
      * @param int|string $count
-     * @param string $string
+     * @param string $word
      * @return string
      */
-    public static function getPluralize(int|string $count, string $string)
+    public static function getPluralize(int|string $count, string $word)
     {
         if (
             !is_numeric($count) ||
             ($count < 0) ||
-            !$string
+            !$word
         )
             return '';
 
-        return morphos\Russian\pluralize($count, $string);
+        return morphos\Russian\pluralize($count, $word);
     }
 
     /**

@@ -2,19 +2,23 @@
 
 namespace chieff\helpers;
 
+use function morphos\Russian\inflectName;
+use function morphos\Russian\pluralize;
+
 class MorphHelper {
 
     /**
      * @param string $name
      * @param string $morphCase
-     * @return string
+     * @return array|false|string|string[]
+     * @throws \Exception
      */
     public static function getName(string $name, string $morphCase = 'предложный')
     {
         if (!$name)
             return '';
 
-        return morphos\Russian\inflectName($name, $morphCase);
+        return inflectName($name, $morphCase);
     }
 
     /**
@@ -35,6 +39,7 @@ class MorphHelper {
      * @param int|string $count
      * @param string $word
      * @return string
+     * @throws \Exception
      */
     public static function getPluralize(int|string $count, string $word)
     {
@@ -45,7 +50,7 @@ class MorphHelper {
         )
             return '';
 
-        return morphos\Russian\pluralize($count, $word);
+        return pluralize($count, $word);
     }
 
     /**

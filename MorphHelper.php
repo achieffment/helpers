@@ -66,7 +66,7 @@ class MorphHelper {
         )
             return '';
 
-        return morphos\Russian\CardinalNumeralGenerator::getCase($number, $morphCase);
+        return \morphos\Russian\CardinalNumeralGenerator::getCase($number, $morphCase);
     }
 
     /**
@@ -82,7 +82,7 @@ class MorphHelper {
         )
             return '';
 
-        return morphos\Russian\OrdinalNumeralGenerator::getCase($number, $morphCase);
+        return \morphos\Russian\OrdinalNumeralGenerator::getCase($number, $morphCase);
     }
 
     /**
@@ -97,7 +97,7 @@ class MorphHelper {
         )
             return '';
 
-        return morphos\Russian\TimeSpeller::spellDifference($time, morphos\TimeSpeller::DIRECTION);
+        return \morphos\Russian\TimeSpeller::spellDifference($time, \morphos\TimeSpeller::DIRECTION);
     }
 
 }

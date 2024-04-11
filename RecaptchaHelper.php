@@ -58,27 +58,28 @@ class RecaptchaHelper {
 
     /**
      * @param string $public
+     * @param string $selector
      * @return string
      */
-    public static function reCAPTCHAV3JS(string $public, string $field = 'rcv_token')
+    public static function reCAPTCHAV3JS(string $public, string $selector = '#rcv_token')
     {
-        if (!$public || !$field)
+        if (!$public || !$selector)
             return '';
 
         return '
         <script src="https://www.google.com/recaptcha/api.js?onload=ReCaptchaCallbackV3&render=' . $public .  '"></script>
         <script>
             var ReCaptchaCallbackV3 = function() {
-            grecaptcha.ready(function() {
-                grecaptcha.reset = grecaptchaExecute;
-                grecaptcha.reset();
-            });
-        };
+                grecaptcha.ready(function() {
+                    grecaptcha.reset = grecaptchaExecute;
+                    grecaptcha.reset();
+                });
+            };
             function grecaptchaExecute() {
                 grecaptcha.execute("' . $public . '", { action: "submit" }).then(function(token) {
-                    var fieldsToken = document.getElementById("' . $field . '");
-                    if (fieldsToken !== undefined && fieldsToken !== "undefined" && fieldsToken !== null)
-                        fieldsToken.value = token;
+                    var fieldToken = document.querySelector("' . $selector . '");
+                    if (fieldToken !== undefined && fieldToken !== "undefined" && fieldToken !== null)
+                        fieldToken.value = token;
                 });
             };
             setInterval(function() {
@@ -88,4 +89,49 @@ class RecaptchaHelper {
         ';
     }
 
+    /**
+     * @param string $public
+     * @return string
+     */
+    public static function reCAPTCHAV3JSOnlyAPI(string $public)
+    {
+        if (!$public)
+            return '';
+
+        return '
+            <script src="https://www.google.com/recaptcha/api.js?onload=ReCaptchaCallbackV3&render=' . $public .  '"></script>
+        ';
+    }
+
+    /**
+     * @param string $public
+     * @param string $selector
+     * @return string
+     */
+    public static function reCAPTCHAV3JSOnlyScript(string $public, string $selector = '#rcv_token')
+    {
+        if (!$public || !$selector)
+            return '';
+
+        return '
+        <script>
+            var ReCaptchaCallbackV3 = function() {
+                grecaptcha.ready(function() {
+                    grecaptcha.reset = grecaptchaExecute;
+                    grecaptcha.reset();
+                });
+            };
+            function grecaptchaExecute() {
+                grecaptcha.execute("' . $public . '", { action: "submit" }).then(function(token) {
+                    var fieldToken = document.querySelector("' . $selector . '");
+                    if (fieldToken !== undefined && fieldToken !== "undefined" && fieldToken !== null)
+                        fieldToken.value = token;
+                });
+            };
+            setInterval(function() {
+                grecaptcha.reset();
+            }, 60000);
+        </script>
+        ';
+    }
 }

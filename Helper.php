@@ -65,7 +65,7 @@ class Helper {
     {
         if (
             !$mail ||
-            !$mail = preg_replace('/\s/', '')
+            !$mail = preg_replace('/\s/', '', $mail)
         )
             return $empty ? '' : false;
 

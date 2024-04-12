@@ -57,6 +57,25 @@ class Helper {
     }
 
     /**
+     * @param string $mail
+     * @param bool $empty
+     * @return false|string
+     */
+    public static function makeMailLink(string $mail, bool $empty = true)
+    {
+        if (
+            !$mail ||
+            !$mail = preg_replace('/\s/', '')
+        )
+            return $empty ? '' : false;
+
+        if (strpos('mailto:', $mail) === false)
+            $mail = 'mailto:' . $mail;
+
+        return $mail;
+    }
+
+    /**
      * @param $info
      * @param string $path
      * @param bool $timeShow

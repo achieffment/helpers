@@ -2,8 +2,6 @@
 
 namespace chieff\helpers;
 
-use ParagonIE\Sodium\Core\Curve25519\Ge\P1p1;
-
 class TelegramHelper
 {
     const API_URL = 'https://api.telegram.org/bot';

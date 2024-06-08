@@ -37,11 +37,13 @@ class CityHelper {
      */
     public function __construct(string $cityDefault, string $token, string $secret)
     {
-        if (!$cityDefault)
+        if (!$cityDefault) {
             throw new \Exception('Default city is empty!');
+        }
 
-        if (!$token || !$secret)
+        if (!$token || !$secret) {
             throw new \Exception('Token or secret are empty!');
+        }
 
         $this->cityDefault = $cityDefault;
 
@@ -69,28 +71,30 @@ class CityHelper {
                     $robotCheck &&
                     !Helper::isRobot()
                 )
-            ) &&
-            ($ip = Helper::getIp()) &&
-            ($ip != '127.0.0.1')
+            )
+            && ($ip = Helper::getIp())
+            && ($ip != '127.0.0.1')
         ) {
             try {
                 $result = $this->dadata->iplocate($ip);
                 if (
-                    $result &&
-                    is_array($result) &&
-                    isset($result["data"]) &&
-                    is_array($result["data"]) &&
-                    isset($result["data"]["city"]) &&
-                    $result["data"]["city"]
-                )
+                    $result
+                    && is_array($result)
+                    && isset($result["data"])
+                    && is_array($result["data"])
+                    && isset($result["data"]["city"])
+                    && $result["data"]["city"]
+                ) {
                     $city = $result["data"]["city"];
+                }
             } catch (\Exception $e) {
 
             }
         }
 
-        if ($morphUse)
+        if ($morphUse) {
             $city = self::getCityMorph($city, $morphCase);
+        }
 
         return $city;
     }
@@ -103,8 +107,9 @@ class CityHelper {
      */
     public static function getCityMorph(string $city, string $morphCase = 'предложный')
     {
-        if (!$city)
+        if (!$city) {
             return '';
+        }
 
         return GeographicalNamesInflection::getCase($city, $morphCase);
     }

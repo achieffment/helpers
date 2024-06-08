@@ -14,8 +14,9 @@ class RecaptchaHelper {
      * @return false|mixed
      */
     public static function reCAPTCHAV3Send(string $secret, string $token, string $remoteip = '') {
-        if (!$secret || !$token)
+        if (!$secret || !$token) {
             return false;
+        }
 
         $url = 'https://www.google.com/recaptcha/api/siteverify';
         $params = [
@@ -41,18 +42,20 @@ class RecaptchaHelper {
      */
     public static function reCAPTCHAV3Validate(string $secret, string $token, string $remoteip = '')
     {
-        if (!$token)
+        if (!$token) {
             return false;
+        }
 
         $response = self::reCAPTCHAV3Send($secret, $token, $remoteip);
 
         if (
-            !$response ||
-            !is_array($response) ||
-            !isset($response['success']) ||
-            !$response["success"]
-        )
+            !$response
+            || !is_array($response)
+            || !isset($response['success'])
+            || !$response["success"]
+        ) {
             return false;
+        }
 
         return true;
     }
@@ -64,11 +67,14 @@ class RecaptchaHelper {
      */
     public static function reCAPTCHAV3JS(string $public, string|array $selector = '#rcv_token')
     {
-        if (!$public || !$selector)
+        if (!$public || !$selector) {
             return '';
+        }
 
-        if (!is_array($selector))
+        if (!is_array($selector)) {
             $selector = [$selector];
+        }
+
         $selector = json_encode($selector, JSON_UNESCAPED_UNICODE);
 
         return '
@@ -103,8 +109,9 @@ class RecaptchaHelper {
      */
     public static function reCAPTCHAV3JSOnlyAPI(string $public)
     {
-        if (!$public)
+        if (!$public) {
             return '';
+        }
 
         return '
             <script src="https://www.google.com/recaptcha/api.js?onload=ReCaptchaCallbackV3&render=' . $public .  '"></script>
@@ -118,11 +125,14 @@ class RecaptchaHelper {
      */
     public static function reCAPTCHAV3JSOnlyScript(string $public, string|array $selector = '#rcv_token')
     {
-        if (!$public || !$selector)
+        if (!$public || !$selector) {
             return '';
+        }
 
-        if (!is_array($selector))
+        if (!is_array($selector)) {
             $selector = [$selector];
+        }
+
         $selector = json_encode($selector, JSON_UNESCAPED_UNICODE);
 
         return '

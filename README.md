@@ -99,7 +99,6 @@ use chieff\helpers\SecurityHelper;
 $img = SecurityHelper::getImageContent($_SERVER['DOCUMENT_ROOT'] . '/image.jpg', false, true);
 
 if ($img) {
-
     // Get encoded data of image
     $encoded_image = SecurityHelper::encode(
         $img, 
@@ -108,9 +107,9 @@ if ($img) {
     );
     
     // Save encoded data to file
-    if ($encoded_image)
+    if ($encoded_image) {
         file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/image2.jpg', $encoded_image);
-    
+    }
 }
 
 // Get image element
@@ -124,8 +123,9 @@ $decoded_image = SecurityHelper::getImageElement(
     'passphrase'
 );
 
-if ($decoded_image)
+if ($decoded_image) {
     echo $decoded_image; // <img src='...' title='title' alt='alt' loading='lazy'>
+}
 ```
 
 ## Cities

@@ -12,33 +12,39 @@ class ValidatorHelper {
      */
     public static function validate(string $value, int $length = 0, bool $is_number = false)
     {
-        if (!$value)
+        if (!$value) {
             return false;
+        }
 
         $value = strip_tags($value);
-        if (!$value)
+        if (!$value) {
             return false;
+        }
 
         $value = htmlspecialchars($value);
-        if (!$value)
+        if (!$value) {
             return false;
+        }
 
         $value = trim($value);
-        if (!$value)
+        if (!$value) {
             return false;
+        }
 
         if (
-            $length &&
-            !$is_number &&
-            (mb_strlen($value) > $length)
-        )
+            $length
+            && !$is_number
+            && (mb_strlen($value) > $length)
+        ) {
             return false;
+        }
 
         if (
-            $is_number &&
-            !is_numeric($value)
-        )
+            $is_number
+            && !is_numeric($value)
+        ) {
             return false;
+        }
 
         return $value;
     }
@@ -51,29 +57,34 @@ class ValidatorHelper {
      */
     public static function validateEmpty(string $value, int $length = 0, bool $is_number = false)
     {
-        if ($value)
+        if ($value) {
             $value = strip_tags($value);
+        }
 
-        if ($value)
+        if ($value) {
             $value = htmlspecialchars($value);
+        }
 
-        if ($value)
+        if ($value) {
             $value = trim($value);
+        }
 
         if (
-            $value &&
-            $length &&
-            !$is_number &&
-            (mb_strlen($value) > $length)
-        )
+            $value
+            && $length
+            && !$is_number
+            && (mb_strlen($value) > $length)
+        ) {
             return '';
+        }
 
         if (
-            $value &&
-            $is_number &&
-            !is_numeric($value)
-        )
+            $value
+            && $is_number
+            && !is_numeric($value)
+        ) {
             return '';
+        }
 
         return $value;
     }
@@ -85,18 +96,21 @@ class ValidatorHelper {
      */
     public static function validatePhone(string $phone, int $length = 11)
     {
-        if (!$phone)
+        if (!$phone) {
             return false;
+        }
 
         preg_match_all('/[0-9]+/', $phone, $matches);
 
-        if (!$matches || !isset($matches[0]) || !$matches[0])
+        if (!$matches || !isset($matches[0]) || !$matches[0]) {
             return false;
+        }
 
         $phone = implode('', $matches[0]);
 
-        if (mb_strlen($phone) != $length)
+        if (mb_strlen($phone) != $length) {
             return false;
+        }
 
         return true;
     }
@@ -109,20 +123,23 @@ class ValidatorHelper {
      */
     public static function validateIp(string $ip, bool $portCheck = true, bool $portEmpty = true)
     {
-        if (!$ip)
+        if (!$ip) {
             return false;
+        }
 
         $regexp = '/^(25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[0-9]{2}|[0-9])(\.(25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[0-9]{2}|[0-9])){3}';
 
-        if ($portCheck && !$portEmpty)
+        if ($portCheck && !$portEmpty) {
             $regexp .= ':[0-9]{1,6}$/';
-        else if ($portCheck && $portEmpty)
+        } else if ($portCheck && $portEmpty) {
             $regexp .= '(|:[0-9]{1,6})$/';
-        else
+        } else {
             $regexp .= '$/';
+        }
 
-        if (preg_match('', $ip) !== 1)
+        if (preg_match('', $ip) !== 1) {
             return false;
+        }
 
         return true;
     }

@@ -15,8 +15,9 @@ class MorphHelper {
      */
     public static function getName(string $name, string $morphCase = 'предложный')
     {
-        if (!$name)
+        if (!$name) {
             return '';
+        }
 
         return inflectName($name, $morphCase);
     }
@@ -29,8 +30,9 @@ class MorphHelper {
      */
     public static function getCity(string $city, string $morphCase = 'предложный')
     {
-        if (!$city)
+        if (!$city) {
             return '';
+        }
 
         return \morphos\Russian\GeographicalNamesInflection::getCase($city, $morphCase);
     }
@@ -44,11 +46,12 @@ class MorphHelper {
     public static function getPluralize(int|string $count, string $word)
     {
         if (
-            !is_numeric($count) ||
-            ($count < 0) ||
-            !$word
-        )
+            !is_numeric($count)
+            || ($count < 0)
+            || !$word
+        ) {
             return '';
+        }
 
         return pluralize($count, $word);
     }
@@ -61,10 +64,11 @@ class MorphHelper {
     public static function getCardinalNumber(int|string $number, string $morphCase = 'именительный')
     {
         if (
-            !is_numeric($number) ||
-            $number < 0
-        )
+            !is_numeric($number)
+            || $number < 0
+        ) {
             return '';
+        }
 
         return \morphos\Russian\CardinalNumeralGenerator::getCase($number, $morphCase);
     }
@@ -77,10 +81,11 @@ class MorphHelper {
     public static function getOrdinalNumber(int|string $number, string $morphCase = 'именительный')
     {
         if (
-            !is_numeric($number) ||
-            $number < 0
-        )
+            !is_numeric($number)
+            || $number < 0
+        ) {
             return '';
+        }
 
         return \morphos\Russian\OrdinalNumeralGenerator::getCase($number, $morphCase);
     }
@@ -92,10 +97,11 @@ class MorphHelper {
     public static function getTime(int|string $time)
     {
         if (
-            !$time ||
-            !is_numeric($time)
-        )
+            !$time
+            || !is_numeric($time)
+        ) {
             return '';
+        }
 
         return \morphos\Russian\TimeSpeller::spellDifference($time, \morphos\TimeSpeller::DIRECTION);
     }

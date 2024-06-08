@@ -12,13 +12,14 @@ class SecurityHelper {
     private static function checkCiphering(string $ciphering)
     {
         // Check ciphering
-        if (!$ciphering)
+        if (!$ciphering) {
             throw new \Exception('You must use ciphering!');
-        else if (
-            ($cipherings = openssl_get_cipher_methods()) &&
-            !in_array($ciphering, $cipherings)
-        )
+        } else if (
+            ($cipherings = openssl_get_cipher_methods())
+            && !in_array($ciphering, $cipherings)
+        ) {
             throw new \Exception('Given ciphering is not exists!');
+        }
     }
 
     /**
@@ -28,8 +29,9 @@ class SecurityHelper {
      */
     private static function encodePassphrase(string $passphrase)
     {
-        if (!$passphrase)
+        if (!$passphrase) {
             throw new \Exception('You must use a passphrase!');
+        }
 
         // More security for passphrase
         $passphrase = base64_encode($passphrase);
@@ -60,8 +62,9 @@ class SecurityHelper {
             }
         }
         // It can not be a string more than 16 bytes
-        if ($bytes_count > 16)
+        if ($bytes_count > 16) {
             throw new \Exception('Can not build iv, use your own or simple examples');
+        }
 
         $iv = implode('', $bytes);
 
@@ -79,16 +82,18 @@ class SecurityHelper {
      */
     public static function encode(string $data, string $ciphering = 'aes-256-ctr', string $passphrase = '', mixed $options = 0, string $iv = '')
     {
-        if (empty($data))
+        if (empty($data)) {
             throw new \Exception('You must give a data to encode!');
+        }
 
         self::checkCiphering($ciphering);
 
         $passphrase = self::encodePassphrase($passphrase);
 
         // If we don't have $iv
-        if (!$iv)
+        if (!$iv) {
             $iv = self::makeIv($ciphering);
+        }
 
         $data = openssl_encrypt($data, $ciphering, $passphrase, $options, $iv);
 
@@ -106,16 +111,18 @@ class SecurityHelper {
      */
     public static function decode(string $data, string $ciphering = 'aes-256-ctr', string $passphrase = '', mixed $options = 0, string $iv = '')
     {
-        if (empty($data))
+        if (empty($data)) {
             return '';
+        }
 
         self::checkCiphering($ciphering);
 
         $passphrase = self::encodePassphrase($passphrase);
 
         // If we don't have $iv
-        if (!$iv)
+        if (!$iv) {
             $iv = self::makeIv($ciphering);
+        }
 
         $data = openssl_decrypt($data, $ciphering, $passphrase, $options, $iv);
 
@@ -137,33 +144,39 @@ class SecurityHelper {
         string $img_path, bool $encoded = false, bool $onlyContent = false,
         string $ciphering = 'aes-256-ctr', string $passphrase = '', mixed $options = 0, string $iv = ''
     ) {
-        if (!$img_path || !file_exists($img_path))
+        if (!$img_path || !file_exists($img_path)) {
             return false;
+        }
 
         // If file encoded, we could not know mime file size
         if (!$encoded) {
             $img_size = getimagesize($img_path);
             if (
-                !is_array($img_size) ||
-                !isset($img_size['mime'])
-            )
+                !is_array($img_size)
+                || !isset($img_size['mime'])
+            ) {
                 return false;
+            }
         }
 
         $img_content = file_get_contents($img_path);
-        if ($encoded)
+        if ($encoded) {
             $img_content = self::decode($img_content, $ciphering, $passphrase, $options, $iv);
+        }
 
-        if (!$img_content)
+        if (!$img_content) {
             return false;
+        }
 
-        if ($onlyContent)
+        if ($onlyContent) {
             return $img_content;
+        }
 
         $img_content = base64_encode($img_content);
 
-        if (!$encoded)
+        if (!$encoded) {
             return 'data:' . $img_size['mime'] . ';base64,' . $img_content;
+        }
 
         return 'data:;base64,' . $img_content;
     }
@@ -187,8 +200,9 @@ class SecurityHelper {
     ) {
         $content = self::getImageContent($img_path, $encoded, false, $ciphering, $passphrase, $options, $iv);
 
-        if (!$content)
+        if (!$content) {
             return false;
+        }
 
         $params = '';
 

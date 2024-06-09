@@ -180,3 +180,13 @@ echo getCardinalNumber(567, 'именительный') // пятьсот шес
 echo getOrdinalNumber(961, 'именительный') // девятьсот шестьдесят первый
 echo getTime(time() + 3600) // через 1 час
 ```
+
+## Telegram
+
+```php
+use chieff\helpers\TelegramHelper;
+
+$cl = new TelegramHelper('token', 'chat_id');
+
+$result = $cl->sendMessage($text);
+```

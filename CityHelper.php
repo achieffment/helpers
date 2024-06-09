@@ -12,12 +12,12 @@ class CityHelper {
     /**
      * @var string
      */
-    private string $dadata_token = '';
+    private string $dadata_token;
 
     /**
      * @var string
      */
-    private string $dadata_secret = '';
+    private string $dadata_secret;
 
     /**
      * @var \Dadata\DadataClient

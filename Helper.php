@@ -40,7 +40,7 @@ class Helper {
 
         preg_match_all('/[0-9]+/', $phone, $matches);
 
-        if (!empty($matches) && !empty($matches[0])) {
+        if (empty($matches) || empty($matches[0])) {
             return $empty ? '' : false;
         }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace chieff\helpers;
+namespace achieffment\helpers;
 
 use function morphos\Russian\inflectName;
 use function morphos\Russian\pluralize;

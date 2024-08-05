@@ -1,6 +1,6 @@
 <?php
 
-namespace chieff\helpers;
+namespace achieffment\helpers;
 
 class TelegramHelper
 {

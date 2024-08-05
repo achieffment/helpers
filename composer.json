@@ -1,9 +1,9 @@
 {
-    "name": "chieff/helpers",
+    "name": "achieffment/helpers",
     "description": "My useful helpers for php development",
     "autoload": {
         "psr-4": {
-            "chieff\\helpers\\": ""
+            "achieffment\\helpers\\": ""
         }
     },
     "require": {

@@ -1,13 +1,13 @@
 ## Installation
 
 ```
-composer require chieff/helpers
+composer require achieffment/helpers
 ```
 
 ## Helpers
 
 ```php
-use chieff\helpers\Helper;
+use achieffment\helpers\Helper;
 
 Helper::print_r($array); // '<pre>printed array</pre>'
 Helper::var_dump($mixed); // '<pre>dumped data</pre>'
@@ -30,7 +30,7 @@ Helper::sendFileLog('data', '', true, true); // Appends file
 ## Validation
 
 ```php
-use chieff\helpers\ValidatorHelper;
+use achieffment\helpers\ValidatorHelper;
 
 // make strip_tags, htmlspecialchars, trim and return false if value is empty else return sanitized string
 
@@ -80,7 +80,7 @@ ValidatorHelper::validateIp('255.255.255.255', true, true); // (true) is ip and 
 
 ### Text encoding:
 ```php
-use chieff\helpers\SecurityHelper;
+use achieffment\helpers\SecurityHelper;
 
 $encoded = SecurityHelper::encode('Simple string', 'aes-256-ctr', 'passphrase');
 
@@ -94,7 +94,7 @@ echo $decoded; // Simple string
 ### Image encoding:
 
 ```php
-use chieff\helpers\SecurityHelper;
+use achieffment\helpers\SecurityHelper;
 
 $img = SecurityHelper::getImageContent($_SERVER['DOCUMENT_ROOT'] . '/image.jpg', false, true);
 
@@ -135,7 +135,7 @@ if ($decoded_image) {
 Helper uses DaData service to locate city by ip, for more information on https://dadata.ru and https://github.com/hflabs/dadata-php), it works only for Russian Federation.
 
 ```php
-use chieff\helpers\CityHelper;
+use achieffment\helpers\CityHelper;
 
 $cl = new CityHelper('Ухта', 'token', 'secret');
 
@@ -149,7 +149,7 @@ echo $cl->getCityByIp(false, true, 'предложный'); // will return city 
 For more information about cases https://github.com/wapmorgan/Morphos/tree/master.
 
 ```php
-use chieff\helpers\CityHelper;
+use achieffment\helpers\CityHelper;
 
 echo CityHelper::getCityMorph('Ухта', 'предложный'); // (Ухте) will return city in given case
 ```
@@ -157,7 +157,7 @@ echo CityHelper::getCityMorph('Ухта', 'предложный'); // (Ухте)
 ## Recaptcha
 
 ```php
-use chieff\helpers\RecaptchaHelper;
+use achieffment\helpers\RecaptchaHelper;
 
 echo RecaptchaHelper::reCAPTCHAV3JS('public', '#rcv_token'); // makes js for rcv3 and updates field with name rcv_token
 echo RecaptchaHelper::reCAPTCHAV3JSOnlyAPI('public'); // makes js for rcv3
@@ -171,7 +171,7 @@ RecaptchaHelper::reCAPTCHAV3Validate('secret', 'token', 'ip'); // sends request 
 For more information about cases https://github.com/wapmorgan/Morphos/tree/master.
 
 ```php
-use chieff\helpers\MorphHelper;
+use achieffment\helpers\MorphHelper;
 
 echo getName('Иванов Петр', 'родительный') // Иванова Петра
 echo getCity('Москва', 'родительный') // Москвы
@@ -184,7 +184,7 @@ echo getTime(time() + 3600) // через 1 час
 ## Telegram
 
 ```php
-use chieff\helpers\TelegramHelper;
+use achieffment\helpers\TelegramHelper;
 
 $cl = new TelegramHelper('token', 'chat_id');
 

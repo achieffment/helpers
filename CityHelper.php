@@ -1,8 +1,8 @@
 <?php
 
-namespace chieff\helpers;
+namespace achieffment\helpers;
 
-use chieff\helpers\Helper;
+use achieffment\helpers\Helper;
 
 use morphos\Russian\GeographicalNamesInflection;
 use Dadata\DadataClient;
